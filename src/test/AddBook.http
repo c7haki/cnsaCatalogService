@@ -1,0 +1,9 @@
+POST http://localhost:9001/api/v1/books
+Content-Type: application/json
+
+{
+  "isbn": "1234567890",
+  "author": "Max Mustermann",
+  "title": "Musterbriefe",
+  "price": 9.9
+}
