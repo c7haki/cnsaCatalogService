@@ -21,7 +21,7 @@ class BookDataLoader(
                 isbn = "1234567890",
                 title = "Spring in Action",
                 author = "Craig Walls",
-                price = 9.0
+                price = 9.0,
             )
         )
         bookRepository.save(
@@ -29,7 +29,8 @@ class BookDataLoader(
                 isbn = "1234567891",
                 title = "Spring Security in Action",
                 author = "Laurentiu Spilca",
-                price = 9.0
+                price = 9.0,
+                publisher = "Manning"
             )
         )
         bookRepository.save(
@@ -37,7 +38,8 @@ class BookDataLoader(
                 isbn = "1234567892",
                 title = "Cloud Native Spring in Action",
                 author = "Thomas Vitale",
-                price = 9.0
+                price = 9.0,
+                publisher = "Manning"
             )
         )
     }

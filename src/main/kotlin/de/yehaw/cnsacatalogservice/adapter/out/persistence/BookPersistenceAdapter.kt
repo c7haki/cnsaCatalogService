@@ -19,7 +19,7 @@ class BookPersistenceAdapter(
     }
 
     override fun load(isbn: String): Book {
-        return bookRepository.findByIsbn(isbn)?.toBook()  ?: throw BookNotFoundException(isbn)
+        return bookRepository.findByIsbn(isbn)?.toBook() ?: throw BookNotFoundException(isbn)
     }
 
     override fun addBook(book: Book): Book {
@@ -31,9 +31,16 @@ class BookPersistenceAdapter(
     }
 
     override fun editBook(isbn: String, book: Book): Book {
-        return bookRepository.findByIsbn(isbn)
-            ?.also { bookRepository.save(it.copy(title = book.title, author = book.author, price = book.price)) }
-            ?.toBook() ?: addBook(book)
+        return bookRepository.findByIsbn(isbn)?.also {
+                bookRepository.save(
+                    it.copy(
+                        title = book.title,
+                        author = book.author,
+                        price = book.price,
+                        publisher = book.publisher
+                    )
+                )
+            }?.toBook() ?: addBook(book)
     }
 
     override fun removeBook(isbn: String) {
@@ -42,5 +49,5 @@ class BookPersistenceAdapter(
 
 }
 
-fun BookEntity.toBook() = Book(isbn, title, author, price)
-fun Book.toBookEntity() = BookEntity(isbn = isbn, title = title, author = author, price = price)
+fun BookEntity.toBook() = Book(isbn, title, author, price, publisher)
+fun Book.toBookEntity() = BookEntity(isbn = isbn, title = title, author = author, price = price, publisher = publisher)

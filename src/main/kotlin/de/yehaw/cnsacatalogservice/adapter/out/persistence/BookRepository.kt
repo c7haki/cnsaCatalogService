@@ -28,6 +28,7 @@ data class BookEntity(
     val title: String,
     val author: String,
     val price: Double,
+    val publisher: String? = null,
     @CreatedDate
     val createdDate: Instant? = null,
     @LastModifiedDate

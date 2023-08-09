@@ -45,8 +45,9 @@ data class BookDto(
     val author: String,
     @get:NotNull(message = "The book price must be defined.")
     @get:Positive(message = "The book price must be greater than zero.")
-    val price: Double
-) {
-    constructor(book: Book): this(book.isbn, book.title, book.author, book.price)
-    fun toBook() = Book(isbn, title, author, price)
+    val price: Double,
+    val publisher: String? = null,
+    ) {
+    constructor(book: Book): this(book.isbn, book.title, book.author, book.price, book.publisher)
+    fun toBook() = Book(isbn, title, author, price, publisher)
 }
