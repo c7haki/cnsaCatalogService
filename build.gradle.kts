@@ -32,6 +32,8 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    implementation(platform("org.testcontainers:testcontainers-bom:1.18.3"))
     testImplementation("org.testcontainers:postgresql")
 }
 
