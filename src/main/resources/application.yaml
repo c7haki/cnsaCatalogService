@@ -20,8 +20,3 @@ spring:
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
-
-  sql:
-    init:
-      schema-locations: classpath:sql/schema.sql
-      mode: always
