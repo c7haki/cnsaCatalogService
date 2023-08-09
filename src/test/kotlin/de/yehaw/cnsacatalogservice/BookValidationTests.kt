@@ -11,12 +11,12 @@ class BookValidationTests {
 
     @Test
     fun whenAllFieldsCorrectThenValidationSucceeds() {
-        assertThat(validator.validate(BookDto("1234567890", "title", "author", 9.9))).isEmpty()
+        assertThat(validator.validate(BookDto("1234567890", "title", "author", 9.9, "publisher"))).isEmpty()
     }
 
     @Test
     fun whenIsbnDefinedButIncorrectThenValidationFails() {
-        val violations = validator.validate(BookDto("a234567890", "title", "author", 9.9))
+        val violations = validator.validate(BookDto("a234567890", "title", "author", 9.9, "publisher"))
         assertThat(violations).hasSize(1)
         assertThat(violations.first().message).isEqualTo("The book ISBN format is invalid.")
     }

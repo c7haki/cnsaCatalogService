@@ -19,8 +19,8 @@ class CnsaCatalogServiceApplicationTests(
 
     @Test
     fun whenPostRequestThenBookCreated() {
-        webTestClient.post().uri("/api/v1/books").bodyValue(Book("1234567890", "title", "author", 9.9)).exchange()
-            .expectStatus().isCreated.expectBody<Book>().value {
+        webTestClient.post().uri("/api/v1/books").bodyValue(Book("1234567890", "title", "author", 9.9, "publisher"))
+            .exchange().expectStatus().isCreated.expectBody<Book>().value {
                 assertThat(it).isNotNull
                 assertThat(it.isbn).isEqualTo("1234567890")
             }

@@ -23,7 +23,8 @@ class BookRepositoryJdbcTests(
 
     @Test
     fun findBookByIsbnWhenExisting() {
-        val book = BookEntity(isbn = "1234567890", title = "Title", author = "Author", price = 12.9)
+        val book =
+            BookEntity(isbn = "1234567890", title = "Title", author = "Author", price = 12.9, publisher = "Publisher")
         jdbcAggregateTemplate.insert(book)
         val actualBook = bookRepository.findByIsbn(book.isbn)
         assertThat(actualBook).isNotNull

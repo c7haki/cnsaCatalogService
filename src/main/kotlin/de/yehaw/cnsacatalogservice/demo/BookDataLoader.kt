@@ -22,6 +22,7 @@ class BookDataLoader(
                 title = "Spring in Action",
                 author = "Craig Walls",
                 price = 9.0,
+                publisher = "Manning"
             )
         )
         bookRepository.save(
