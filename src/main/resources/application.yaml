@@ -6,3 +6,22 @@ server:
     threads:
       max: 50
       min-spare: 5
+
+cnsa:
+  greeting: "Welcome to the local book catalog!"
+
+
+spring:
+
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/cnsa_catalog
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
+
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+      mode: always

@@ -1,40 +1,37 @@
 package de.yehaw.cnsacatalogservice.adapter.out.persistence
 
-import de.yehaw.cnsacatalogservice.application.domain.model.Book
-import org.springframework.stereotype.Repository
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.annotation.Version
+import org.springframework.data.jdbc.repository.query.Modifying
+import org.springframework.data.jdbc.repository.query.Query
+import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.repository.CrudRepository
+import org.springframework.transaction.annotation.Transactional
+import java.time.Instant
 
-interface BookRepository {
-    fun findAll() : Iterable<Book>
-    fun findByIsbn(isbn: String) : Book?
-    fun existsByIsbn(isbn: String) : Boolean
-    fun save(book: Book) : Book
+interface BookRepository : CrudRepository<BookEntity, Long> {
+    fun findByIsbn(isbn: String): BookEntity?
+    fun existsByIsbn(isbn: String): Boolean
+
+    @Modifying
+    @Transactional
+    @Query("delete from book where isbn = :isbn")
     fun deleteByIsbn(isbn: String)
 }
 
-@Repository
-class InMemoryBookRepository : BookRepository {
-
-    private val books = mutableMapOf<String, Book>()
-
-    override fun findAll(): Iterable<Book> {
-        return books.values
-    }
-
-    override fun findByIsbn(isbn: String): Book? {
-        return books[isbn]
-    }
-
-    override fun existsByIsbn(isbn: String): Boolean {
-        return books.containsKey(isbn)
-    }
-
-    override fun save(book: Book): Book {
-        books[book.isbn] = book
-        return book
-    }
-
-    override fun deleteByIsbn(isbn: String) {
-        books.remove(isbn)
-    }
-
-}
+@Table("book")
+data class BookEntity(
+    @Id val id: Long? = null,
+    val isbn: String,
+    val title: String,
+    val author: String,
+    val price: Double,
+    @CreatedDate
+    val createdDate: Instant? = null,
+    @LastModifiedDate
+    val lastModifiedDate: Instant ? = null,
+    @Version
+    val version: Int? = null,
+)
