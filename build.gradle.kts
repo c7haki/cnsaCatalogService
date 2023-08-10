@@ -20,11 +20,15 @@ repositories {
     mavenCentral()
 }
 
+extra["springCloudVersion"] = "2022.0.4"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -38,6 +42,12 @@ dependencies {
 
     implementation(platform("org.testcontainers:testcontainers-bom:1.18.3"))
     testImplementation("org.testcontainers:postgresql")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
 }
 
 tasks.withType<BootBuildImage> {

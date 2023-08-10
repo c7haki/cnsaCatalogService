@@ -13,6 +13,16 @@ cnsa:
 
 spring:
 
+  application:
+    name: cnsa-catalog-service
+
+  config:
+    import: "optional:configserver:"
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+
   datasource:
     username: user
     password: password
