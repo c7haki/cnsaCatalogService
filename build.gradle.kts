@@ -30,6 +30,8 @@ dependencies {
 
     implementation("org.springframework.cloud:spring-cloud-starter-config")
 
+    implementation("org.springframework.retry:spring-retry")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     implementation("org.flywaydb:flyway-core")
