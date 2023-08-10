@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     id("org.springframework.boot") version "3.1.2"
     id("io.spring.dependency-management") version "1.1.2"
+    java
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
 }
@@ -36,6 +38,18 @@ dependencies {
 
     implementation(platform("org.testcontainers:testcontainers-bom:1.18.3"))
     testImplementation("org.testcontainers:postgresql")
+}
+
+tasks.withType<BootBuildImage> {
+    imageName.set(project.name)
+    environment.set(environment.get() + mapOf("BP_JVM_VERSION" to "17.*"))
+    docker {
+        publishRegistry {
+            username.set("${project.findProperty("registryUsername")}")
+            password.set("${project.findProperty("registryToken")}")
+            url.set("${project.findProperty("registryUrl")}")
+        }
+    }
 }
 
 tasks.withType<KotlinCompile> {
