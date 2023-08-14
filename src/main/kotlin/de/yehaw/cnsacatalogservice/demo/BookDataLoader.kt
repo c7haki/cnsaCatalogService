@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 @ConditionalOnProperty(prefix = "cnsa", name = ["testdata.enabled"], havingValue = "true")
@@ -14,8 +15,11 @@ class BookDataLoader(
 ) {
 
     @EventListener(ApplicationReadyEvent::class)
+    // This should be enough for testing purposes.
+    // Otherwise, consider using a control table instead, or using a shared redis lock,
+    // or a kubernetes init container or spring job manager.
+    @Transactional
     fun loadBookTestData() {
-        // TODO avoid loading data multiple times
         bookRepository.deleteAll()
         bookRepository.save(
             BookEntity(
