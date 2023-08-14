@@ -27,6 +27,10 @@ spec:
           env:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://cnsa-config-service
+            - name: SPRING_CLOUD_CONFIG_FAIL_FAST
+              value: "true"
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://cnsa-postgres/cnsa_catalog
             - name: CNSA_TESTDATA_ENABLED
