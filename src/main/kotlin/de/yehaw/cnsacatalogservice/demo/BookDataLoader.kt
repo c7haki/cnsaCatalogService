@@ -15,6 +15,7 @@ class BookDataLoader(
 
     @EventListener(ApplicationReadyEvent::class)
     fun loadBookTestData() {
+        // TODO avoid loading data multiple times
         bookRepository.deleteAll()
         bookRepository.save(
             BookEntity(
