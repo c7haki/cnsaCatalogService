@@ -23,7 +23,7 @@ class BookDataLoader(
         bookRepository.deleteAll()
         bookRepository.save(
             BookEntity(
-                isbn = "1234567890",
+                isbn = "9781617297571",
                 title = "Spring in Action",
                 author = "Craig Walls",
                 price = 9.0,
@@ -32,7 +32,7 @@ class BookDataLoader(
         )
         bookRepository.save(
             BookEntity(
-                isbn = "1234567891",
+                isbn = "9781617297731",
                 title = "Spring Security in Action",
                 author = "Laurentiu Spilca",
                 price = 9.0,
@@ -41,7 +41,7 @@ class BookDataLoader(
         )
         bookRepository.save(
             BookEntity(
-                isbn = "1234567892",
+                isbn = "9781617298424",
                 title = "Cloud Native Spring in Action",
                 author = "Thomas Vitale",
                 price = 9.0,
